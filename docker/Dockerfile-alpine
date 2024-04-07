@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-alpine
 MAINTAINER Jean-Marc Astesana <admin@fathzer.com>
 
 WORKDIR ./lichessbot
