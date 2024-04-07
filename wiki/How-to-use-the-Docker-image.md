@@ -33,7 +33,7 @@ This is the defacto image. It is based on the [`python:3`](https://hub.docker.co
 If you are unsure about what your needs are, you probably want to use this one.
 
 ## lichess-bot:\<version\>-alpine
-This image is based on the popular Alpine Linux project, available in the alpine official image. Alpine Linux is much smaller than most distribution base images, and thus leads to a much slimmer image than the default one (70MB instead of 1GB).
+This image is based on the popular Alpine Linux project, available in the alpine official image. Alpine Linux is much smaller than most distribution base images, and thus leads to a much slimmer image than the default one (80MB instead of 1GB).
 
 This variant is useful when final image size being as small as possible is your primary concern. The main caveat to note is that it does use musl libc instead of glibc and friends, so software will often run into issues depending on the depth of their libc requirements/assumptions. For instance, running [Stockfish](https://stockfishchess.org/) on this image requires extra libraries installation.
 
