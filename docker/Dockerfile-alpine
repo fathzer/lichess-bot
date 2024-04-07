@@ -7,4 +7,6 @@ COPY . .
 
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
-CMD python3 lichess-bot.py ${OPTIONS} --config /engine/config.yml
+ENV LICHESS_BOT_DOCKER="true"
+
+CMD python3 lichess-bot.py ${OPTIONS} --disable_auto_logging --config /engine/config.yml
