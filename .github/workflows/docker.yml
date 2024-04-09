@@ -53,6 +53,6 @@ jobs:
         with:
           context: .
           file: ./docker/Dockerfile
-          build-args: VARIANT="-alpine"
+          build-args: VARIANT=-alpine
           push: true
           tags: ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerAlpineTag}}
