@@ -1,4 +1,5 @@
-FROM python:3
+VAR VARIANT
+FROM python:3$VARIANT
 MAINTAINER Jean-Marc Astesana <admin@fathzer.com>
 
 WORKDIR ./lichessbot
