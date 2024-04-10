@@ -12,7 +12,6 @@ COPY . .
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 RUN ln -s /engine/config.yml config.yml &&\
-    ln -sf /engine/homemade.py homemade.py &&\
-    ln -sf /engine/extra_game_handlers.py extra_game_handlers.py
+    ln -sf /engine/homemade.py homemade.py
 
 CMD python3 lichess-bot.py ${OPTIONS} --disable_auto_logging
