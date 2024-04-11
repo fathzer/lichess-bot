@@ -1,4 +1,4 @@
-"""Functions for the user to implement when the config file is not adequate to express bot requirements."""
+"""Fail over of functions for the user to implement when the config file is not adequate to express bot requirements."""
 from lib import model
 from typing import Any
 
