@@ -50,7 +50,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: name/app
+          images: ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}
           
       - name: Demo build and push
         uses: docker/build-push-action@v5
