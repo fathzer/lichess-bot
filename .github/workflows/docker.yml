@@ -36,7 +36,7 @@ jobs:
         run: |
           echo "dockerTag:'"$dockerTag"'"
           echo "dockerAlpineTag:'"$dockerAlpineTag"'"
-#          echo ${{ GB_REGISTRY }}
+          echo "$GB_REGISTRY"
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -47,36 +47,9 @@ jobs:
       - name: Login to Github container registry
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
+          registry: ${{ GB_REGISTRY }}
           username: ${{ secrets.GB_REPO_USER }}
           password: ${{ secrets.GB_REPO_PWD }}
-          
-#      - name: Docker meta fat image
-#        id: meta
-#        uses: docker/metadata-action@v5
-#        with:
-#          images: |
-#            ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}
-#            ghcr.io/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}
-#          tags: |
-#            ${{env.dockerTag}}
-            
-#      - name: Demo build and push fat image
-#        uses: docker/build-push-action@v5
-#        with:
-#          context: .
-#          file: ./docker/Dockerfile
-#          push: true
-#          tags: ${{env.dockerTag}}
-#          
-#      - name: Demo build and push aline image
-#        uses: docker/build-push-action@v5
-#        with:
-#          context: .
-#          file: ./docker/Dockerfile
-#          build-args: VARIANT=-alpine
-#          push: true
-#          tags: ${{env.dockerAlpineTag}}
           
       - name: build and push fat image
         uses: docker/build-push-action@v5
