@@ -58,6 +58,9 @@ jobs:
           images: |
             ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}
             ghcr.io/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}
+          tags: |
+            ${{env.dockerTag}}
+            
             
           
       - name: Demo build and push
