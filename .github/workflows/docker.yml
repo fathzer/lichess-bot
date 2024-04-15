@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - master
+      - github-repo
 
 jobs:
   build:
@@ -38,6 +39,26 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PWD }}
+          
+#      - name: Login to container registry
+#        uses: docker/login-action@v3
+#        with:
+#          username: ${{ secrets.GITHUB_USER }}
+#          password: ${{ secrets.GITHUB_PWD }}
+          
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: name/app
+          
+      - name: Demo build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           
       - name: build and push fat image
         uses: docker/build-push-action@v5
