@@ -58,19 +58,14 @@ jobs:
           images: |
             ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}
             ghcr.io/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}
-          tags: |
-            ${{env.dockerTag}}
             
-            
-          
-      - name: Demo build and push
+      - name: Demo build and push fat image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./docker/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-#          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{env.dockerTag}}
           
 #      - name: build and push fat image
 #        uses: docker/build-push-action@v5
@@ -79,7 +74,16 @@ jobs:
 #          file: ./docker/Dockerfile
 #          push: true
 #          tags: ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerTag}}          
-#
+
+      - name: build and push alpine image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile
+          build-args: VARIANT=-alpine
+          push: true
+          tags: ${{env.dockerAlpineTag}}
+
 #      - name: build and push alpine image
 #        uses: docker/build-push-action@v5
 #        with:
