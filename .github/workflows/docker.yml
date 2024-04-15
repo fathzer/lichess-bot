@@ -59,7 +59,7 @@ jobs:
           push: true
           tags: |
             ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerTag}}
-            ghcr.io/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerTag}}       
+            ${{ env.GB_REGISTRY }}/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerTag}}       
 
       - name: build and push alpine image
         uses: docker/build-push-action@v5
@@ -70,4 +70,4 @@ jobs:
           push: true
           tags: |
             ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerAlpineTag}}
-            ghcr.io/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerAlpineTag}}
+            ${{ env.GB_REGISTRY }}/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerAlpineTag}}
