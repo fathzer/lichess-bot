@@ -24,6 +24,9 @@ jobs:
       
       - name: Assign defaultValue
         run: |
+          cat lib/versioning.yml
+          version=grep -m1 '^lichess_bot_version: ' lib/versioning.yml | sed -n -e 's/^.*://p' | tr -d '[:space:]'
+          echo version="$version" >> "$GITHUB_ENV"
           USER_INPUT="${{ github.event.inputs.dockerTagPrefix }}"
           # Use user input or fall back to "latest"
           dockerTag=${USER_INPUT:-"latest"}
@@ -31,8 +34,6 @@ jobs:
           # Use $dockerTag-alpine or fall back to "alpine"
           dockerAlpineTag=$([ "$dockerTag" = "latest" ] && echo "alpine" || echo $dockerTag"-alpine")
           echo dockerAlpineTag="$dockerAlpineTag" >> "$GITHUB_ENV"
-          version=grep -m1 '^lichess_bot_version: ' lib/versioning.yml | sed -n -e 's/^.*://p' | tr -d '[:space:]'
-          echo version="$version" >> "$GITHUB_ENV"
       
       - name: show me docker tags.
         run: |
@@ -40,36 +41,37 @@ jobs:
           echo "dockerAlpineTag:'"$dockerAlpineTag"'"
           echo "version:'"$version"'"
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PWD }}
-          
-      - name: Login to Github container registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.GB_REGISTRY }}
-          username: ${{ secrets.GB_REPO_USER }}
-          password: ${{ secrets.GB_REPO_PWD }}
-          
-      - name: build and push fat image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./docker/Dockerfile
-          push: true
-          tags: |
-            ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerTag}}
-            ${{ env.GB_REGISTRY }}/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerTag}}       
-
-      - name: build and push alpine image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./docker/Dockerfile
-          build-args: VARIANT=-alpine
-          push: true
-          tags: |
-            ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerAlpineTag}}
-            ${{ env.GB_REGISTRY }}/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerAlpineTag}}
+#      - name: Login to Docker Hub
+#        uses: docker/login-action@v3
+#        with:
+#          username: ${{ secrets.DOCKER_USER }}
+#          password: ${{ secrets.DOCKER_PWD }}
+#          
+#      - name: Login to Github container registry
+#        uses: docker/login-action@v3
+#        with:
+#          registry: ${{ env.GB_REGISTRY }}
+#          username: ${{ secrets.GB_REPO_USER }}
+#          password: ${{ secrets.GB_REPO_PWD }}
+#          
+#      - name: build and push fat image
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: .
+#          file: ./docker/Dockerfile
+#          push: true
+#          tags: |
+#            ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerTag}}
+#            ${{ env.GB_REGISTRY }}/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerTag}}       
+#
+#      - name: build and push alpine image
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: .
+#          file: ./docker/Dockerfile
+#          build-args: VARIANT=-alpine
+#          push: true
+#          tags: |
+#            ${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerAlpineTag}}
+#            ${{ env.GB_REGISTRY }}/${{ vars.DOCKER_ORGANIZATION }}/${{ vars.DOCKER_IMG }}:${{env.dockerAlpineTag}}
+ 
