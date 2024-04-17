@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - master
+      - with-version
 
 env:
   GB_REGISTRY: ghcr.io
