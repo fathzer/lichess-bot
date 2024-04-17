@@ -28,6 +28,8 @@ jobs:
           echo "----"
           grep -m1 '^lichess_bot_version: ' lib/versioning.yml | sed -n -e 's/^.*://p' | tr -d '[:space:]'
           echo "----"
+          echo "$GITHUB_ENV"
+          echo "----"
           version="grep -m1 '^lichess_bot_version: ' lib/versioning.yml | sed -n -e 's/^.*://p' | tr -d '[:space:]'"
           echo version="$version" >> "$GITHUB_ENV"
           USER_INPUT="${{ github.event.inputs.dockerTagPrefix }}"
