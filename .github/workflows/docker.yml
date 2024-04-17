@@ -1,17 +1,12 @@
 name: Docker CI
 
 on:
-  # Configure Manual Trigger
-  workflow_dispatch:
-    inputs:
-      dockerTagPrefix:
-        description: 'Docker image tag prefix'
-        required: true
-        default: 'latest'
   push:
     branches:
       - master
       - with-version
+    paths:
+      - lib/versioning.yml
 
 env:
   GB_REGISTRY: ghcr.io
