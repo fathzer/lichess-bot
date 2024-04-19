@@ -84,10 +84,12 @@ def config_assert(assertion: bool, error_message: str) -> None:
     if not assertion:
         raise Exception(error_message)
 
+
 def config_warn(assertion: bool, warning_message: str) -> None:
     """Raise an exception if an assertion is false."""
     if not assertion:
         logger.warning(warning_message)
+
 
 def check_config_section(config: CONFIG_DICT_TYPE, data_name: str, data_type: ABCMeta, subsection: str = "") -> None:
     """
