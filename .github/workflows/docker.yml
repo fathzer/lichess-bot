@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - master
-    paths:
-      - lib/versioning.yml
+      - fixes_build_wkflw
+#    paths:
+#      - lib/versioning.yml
 
 env:
   GB_REGISTRY: ghcr.io
