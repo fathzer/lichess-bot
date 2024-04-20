@@ -98,15 +98,10 @@ class Challenge:
             if self.from_self:
                 return True, ""
 
-            docker_version = True
+            is_supported_extra_result = True
             try:
                 from extra_game_handlers import is_supported_extra
-                docker_version = False
-            except ImportError:
-                pass
-
-            try:
-                from lib.extra_game_handlers_failover import is_supported_extra_docker
+                is_supported_extra_result = is_supported_extra(self)
             except ImportError:
                 pass
 
@@ -119,8 +114,7 @@ class Challenge:
                               or self.decline_due_to(self.challenger.name not in config.block_list, "generic")
                               or self.decline_due_to(self.challenger.name in allowed_opponents, "generic")
                               or self.decline_due_to(self.is_supported_recent(config, recent_bot_challenges), "later")
-                              or self.decline_due_to(
-                is_supported_extra(self) if not docker_version else is_supported_extra_docker(self), "generic"))
+                              or self.decline_due_to(is_supported_extra_result, "generic"))
 
             return not decline_reason, decline_reason
 
