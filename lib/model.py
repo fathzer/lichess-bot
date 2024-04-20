@@ -98,7 +98,6 @@ class Challenge:
             if self.from_self:
                 return True, ""
 
-            from extra_game_handlers import is_supported_extra
             docker_version = True
             try:
                 from extra_game_handlers import is_supported_extra
