@@ -106,7 +106,7 @@ class Challenge:
                 pass
 
             try:
-                from lib.extra_game_handlers_failover import is_supported_extra_docker  # type: ignore[import-untyped]
+                from lib.extra_game_handlers_failover import is_supported_extra_docker
             except ImportError:
                 pass
 
