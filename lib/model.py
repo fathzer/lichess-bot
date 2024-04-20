@@ -111,7 +111,6 @@ class Challenge:
             except ImportError:
                 pass
             
-            
             allowed_opponents: list[str] = list(filter(None, config.allow_list)) or [self.challenger.name]
             decline_reason = (self.decline_due_to(config.accept_bot or not self.challenger.is_bot, "noBot")
                               or self.decline_due_to(not config.only_bot or self.challenger.is_bot, "onlyBot")
