@@ -3,9 +3,9 @@ name: Docker CI
 on:
   push:
     branches:
-      - master
-    paths:
-      - lib/versioning.yml
+      - fixes_wkflw2
+#    paths:
+#      - lib/versioning.yml
 
 env:
   GB_REGISTRY: ghcr.io
