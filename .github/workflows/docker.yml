@@ -3,9 +3,10 @@ name: Docker CI
 on:
   push:
     branches:
+      - fixes*
       - master
-    paths:
-      - lib/versioning.yml
+#    paths:
+#      - lib/versioning.yml
 
 env:
   GB_REGISTRY: ghcr.io
