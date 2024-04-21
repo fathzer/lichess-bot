@@ -7,7 +7,8 @@ def game_specific_options(game: model.Game) -> dict[str, Any]:
     """
     Return a dictionary of engine options based on game aspects.
 
-    By default, if no custom extra_game_handler is found, an empty dict is returned so that the options in the configuration file are used.
+    By default, if no custom extra_game_handler is found, an empty dict is returned so that the options
+    in the configuration file are used.
     """
     try:
         from extra_game_handlers import game_specific_options
@@ -22,7 +23,8 @@ def is_supported_extra(challenge: model.Challenge) -> bool:
     """
     Determine whether to accept a challenge.
 
-    By default, if no custom extra_game_handler is found, True is returned so that there are no extra restrictions beyond those in the config file.
+    By default, if no custom extra_game_handler is found, True is returned so that there are no extra restrictions
+    beyond those in the config file.
     """
     try:
         from extra_game_handlers import is_supported_extra
