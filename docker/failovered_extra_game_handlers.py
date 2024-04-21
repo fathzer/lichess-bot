@@ -20,7 +20,7 @@ def is_supported_extra(challenge: model.Challenge) -> bool:
     """
     try:
         from extra_game_handlers import is_supported_extra
-        return is_supported_extra(self)
+        return is_supported_extra(challenge)
     except ImportError:
         pass
     
