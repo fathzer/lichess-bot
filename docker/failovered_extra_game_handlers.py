@@ -23,5 +23,5 @@ def is_supported_extra(challenge: model.Challenge) -> bool:
         return is_supported_extra(challenge)
     except ImportError:
         pass
-    
+
     return True
