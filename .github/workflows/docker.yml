@@ -1,11 +1,10 @@
 name: Docker CI
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - lib/versioning.yml
+  workflow_run:
+    workflows: ["Versioning"]
+    types:
+      - completed
 
 env:
   GB_REGISTRY: ghcr.io
